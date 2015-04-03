@@ -1,5 +1,7 @@
 package com.wallmart.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Route {
 
 	private String origin;
@@ -36,6 +38,18 @@ public class Route {
 	public void setDistance(Integer distance) {
 
 		this.distance = distance;
+	}
+
+	public void validate() {
+
+		if (StringUtils.isEmpty(origin)) throw new IllegalArgumentException("Route with empty origin");
+		if (StringUtils.isEmpty(destination))
+		    throw new IllegalArgumentException("Route with empty destination");
+
+		// TODO: pode distancia negativa? e zero?
+		if (distance == null) throw new IllegalArgumentException("Route with empty distance");
+		if (distance < 0) throw new IllegalArgumentException("Route with negative distance");
+
 	}
 
 }

@@ -16,14 +16,26 @@ public class MapResource {
 
 			Map map = new Gson().fromJson(req.body(), Map.class);
 
-			if (StringUtils.isEmpty(map.getName())) {
-				halt(400);
-			}
+			if (map == null) halt(400, "Empty body");
+			if (StringUtils.isEmpty(map.getName())) halt(400, "Empty map name");
+			if (map.getRoutes() == null) halt(400, "Empty routes");
+
+			// TODO: pode distancia negativa? e zero?
+			map.getRoutes().forEach(r -> {
+				if (StringUtils.isEmpty(r.getOrigin())) halt(400, "Route with empty origin");
+				if (StringUtils.isEmpty(r.getDestination())) halt(400, "Route with empty destination");
+				if (r.getDistance() == null) halt(400, "Route with empty distance");
+				if (r.getDistance() < 0) halt(400, "Route with negative distance");
+			});
+
+			// TODO: persist
 
 			resp.status(202);
 			resp.type("application/json");
 			return new Gson().toJson(map);
 		});
+
+		// TODO: route calculate
 
 	}
 }

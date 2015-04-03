@@ -62,10 +62,155 @@ public class MapResourceTest {
 	}
 
 	@Test
-	public void testPostWithouBody() {
+	public void testPostWithoutBody() {
 
 		given()
 		    .body("")
+		    .contentType("application/json; charset=UTF-8")
+		    .when()
+		    .post("/maps")
+		    .then()
+		    .statusCode(400);
+
+	}
+
+	@Test
+	public void testPostWithEmptyJson() {
+
+		given()
+		    .body("{}")
+		    .contentType("application/json; charset=UTF-8")
+		    .when()
+		    .post("/maps")
+		    .then()
+		    .statusCode(400);
+
+	}
+
+	@Test
+	public void testPostWithoutName() {
+
+		given()
+		    .body("{\"routes\": [{\"origin\": \"Limeira\", \"destination\": \"Americana\", \"distance\": 50}]}")
+		    .contentType("application/json; charset=UTF-8")
+		    .when()
+		    .post("/maps")
+		    .then()
+		    .statusCode(400);
+
+	}
+
+	@Test
+	public void testPostWithBlankName() {
+
+		given()
+		    .body("{\"name\": \"\", \"routes\": [{\"origin\": \"Limeira\", \"destination\": \"Americana\", \"distance\": 50}]}")
+		    .contentType("application/json; charset=UTF-8")
+		    .when()
+		    .post("/maps")
+		    .then()
+		    .statusCode(400);
+
+	}
+
+	@Test
+	public void testPostWithoutRoutes() {
+
+		given()
+		    .body("{\"name\": \"SP\"}")
+		    .contentType("application/json; charset=UTF-8")
+		    .when()
+		    .post("/maps")
+		    .then()
+		    .statusCode(400);
+
+	}
+
+	@Test
+	public void testPostWithEmptyRoutes() {
+
+		given()
+		    .body("{\"name\": \"SP\", \"routes\": []}")
+		    .contentType("application/json; charset=UTF-8")
+		    .when()
+		    .post("/maps")
+		    .then()
+		    .statusCode(202)
+		    .body("name", equalTo("SP"))
+		    .body("routes.size()", equalTo(0));
+
+	}
+
+	@Test
+	public void testPostWithRouteWithoutOrigin() {
+
+		given()
+		    .body("{\"name\": \"SP\", \"routes\": [{\"destination\": \"Americana\", \"distance\": 50}]}")
+		    .contentType("application/json; charset=UTF-8")
+		    .when()
+		    .post("/maps")
+		    .then()
+		    .statusCode(400);
+
+	}
+
+	@Test
+	public void testPostWithRouteWithEmptyOrigin() {
+
+		given()
+		    .body("{\"name\": \"SP\", \"routes\": [{\"origin\": \"\", \"destination\": \"Americana\", \"distance\": 50}]}")
+		    .contentType("application/json; charset=UTF-8")
+		    .when()
+		    .post("/maps")
+		    .then()
+		    .statusCode(400);
+
+	}
+
+	@Test
+	public void testPostWithRouteWithoutDestination() {
+
+		given()
+		    .body("{\"name\": \"SP\", \"routes\": [{\"origin\": \"Americana\", \"distance\": 50}]}")
+		    .contentType("application/json; charset=UTF-8")
+		    .when()
+		    .post("/maps")
+		    .then()
+		    .statusCode(400);
+
+	}
+
+	@Test
+	public void testPostWithRouteWithEmptyDestination() {
+
+		given()
+		    .body("{\"name\": \"SP\", \"routes\": [{\"origin\": \"Limeira\", \"destination\": \"\", \"distance\": 50}]}")
+		    .contentType("application/json; charset=UTF-8")
+		    .when()
+		    .post("/maps")
+		    .then()
+		    .statusCode(400);
+
+	}
+
+	@Test
+	public void testPostWithRouteWithoutDistance() {
+
+		given()
+		    .body("{\"name\": \"SP\", \"routes\": [{\"origin\": \"Limeira\", \"destination\": \"Americana\"}]}")
+		    .contentType("application/json; charset=UTF-8")
+		    .when()
+		    .post("/maps")
+		    .then()
+		    .statusCode(400);
+
+	}
+
+	@Test
+	public void testPostWithRouteWithNegativeDistance() {
+
+		given()
+		    .body("{\"name\": \"SP\", \"routes\": [{\"origin\": \"Limeira\", \"destination\": \"Americana\", \"distance\": -10}]}")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
 		    .post("/maps")

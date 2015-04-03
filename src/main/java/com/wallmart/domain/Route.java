@@ -6,7 +6,7 @@ public class Route {
 
 	private String destination;
 
-	private int distance;
+	private Integer distance;
 
 	public String getOrigin() {
 
@@ -28,12 +28,12 @@ public class Route {
 		this.destination = destination;
 	}
 
-	public int getDistance() {
+	public Integer getDistance() {
 
 		return distance;
 	}
 
-	public void setDistance(int distance) {
+	public void setDistance(Integer distance) {
 
 		this.distance = distance;
 	}

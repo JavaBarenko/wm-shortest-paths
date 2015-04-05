@@ -8,7 +8,7 @@ public class Route {
 
 	private String destination;
 
-	private Integer distance;
+	private Float distance;
 
 	public String getOrigin() {
 
@@ -30,12 +30,12 @@ public class Route {
 		this.destination = destination;
 	}
 
-	public Integer getDistance() {
+	public Float getDistance() {
 
 		return distance;
 	}
 
-	public void setDistance(Integer distance) {
+	public void setDistance(Float distance) {
 
 		this.distance = distance;
 	}

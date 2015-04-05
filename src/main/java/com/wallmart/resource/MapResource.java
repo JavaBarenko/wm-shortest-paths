@@ -31,7 +31,6 @@ public class MapResource {
 
 			try {
 
-				map.validate();
 				service.save(map);
 
 			} catch (IllegalArgumentException e) {

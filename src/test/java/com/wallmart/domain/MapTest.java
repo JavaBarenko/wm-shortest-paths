@@ -2,5 +2,5 @@ package com.wallmart.domain;
 
 public class MapTest {
 
-	// TODO
+	// TODO: test domain Map
 }

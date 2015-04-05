@@ -46,9 +46,8 @@ public class Route {
 		if (StringUtils.isEmpty(destination))
 		    throw new IllegalArgumentException("Route with empty destination");
 
-		// TODO: pode distancia negativa? e zero?
 		if (distance == null) throw new IllegalArgumentException("Route with empty distance");
-		if (distance < 0) throw new IllegalArgumentException("Route with negative distance");
+		if (distance <= 0) throw new IllegalArgumentException("Route with negative distance");
 
 	}
 

@@ -8,14 +8,27 @@ import com.wallmart.persistence.MapRepository;
 
 public class MapService {
 
-	// TODO: map name = id
+	private MapRepository repository = null;
 
 	@Inject
-	private MapRepository repository;
+	public void setRepository(MapRepository repository) {
+
+		this.repository = repository;
+	}
 
 	public void save(Map map) {
 
-		repository.save(map);
+		map.validate();
+		repository.save(map.getName(), map);
+	}
+
+	public ShortestPath calculateShortestPath(String mapName, String origin, String destination) {
+
+		Map map = repository.findById(mapName);
+
+		map.validate();
+
+		return new ShortestPath(map, origin, destination);
 	}
 
 	public ShortestPathCost calculateShortestPathCost(
@@ -36,22 +49,5 @@ public class MapService {
 		shortestPathCost.setCost(cost);
 
 		return shortestPathCost;
-	}
-
-	public ShortestPath calculateShortestPath(String mapName, String origin, String destination) {
-
-		// TODO: implementar djkistra
-
-		float distance = 1;
-		String[] path = new String[] { "São Paulo", "Limeira", "Americana" };
-
-		ShortestPath shortestPath = new ShortestPath();
-		shortestPath.setMapName(mapName);
-		shortestPath.setOrigin(origin);
-		shortestPath.setDestination(destination);
-		shortestPath.setPath(path);
-		shortestPath.setDistance(distance);
-
-		return shortestPath;
 	}
 }

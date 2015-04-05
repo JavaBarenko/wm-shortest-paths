@@ -6,7 +6,7 @@ import com.mongodb.client.MongoDatabase;
 
 public class MongoDatabaseProvider implements Provider<MongoDatabase> {
 
-	// TODO: extract
+	// TODO: extract dbname
 	private String dbName = "logistic";
 
 	@Override

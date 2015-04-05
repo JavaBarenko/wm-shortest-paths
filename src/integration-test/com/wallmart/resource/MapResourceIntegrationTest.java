@@ -18,7 +18,7 @@ public class MapResourceIntegrationTest {
 	@BeforeClass
 	public static void tearUp() {
 
-		new Bootstrap().startHTTPServer();
+		new Bootstrap().start();
 
 		RestAssured.proxy("localhost", 4567);
 	}
@@ -136,9 +136,7 @@ public class MapResourceIntegrationTest {
 		    .when()
 		    .post("/maps")
 		    .then()
-		    .statusCode(202)
-		    .body("name", equalTo("SP"))
-		    .body("routes.size()", equalTo(0));
+		    .statusCode(400);
 
 	}
 
@@ -212,6 +210,19 @@ public class MapResourceIntegrationTest {
 
 		given()
 		    .body("{\"name\": \"SP\", \"routes\": [{\"origin\": \"Limeira\", \"destination\": \"Americana\", \"distance\": -10}]}")
+		    .contentType("application/json; charset=UTF-8")
+		    .when()
+		    .post("/maps")
+		    .then()
+		    .statusCode(400);
+
+	}
+
+	@Test
+	public void testPostWithRouteWithZeroDistance() {
+
+		given()
+		    .body("{\"name\": \"SP\", \"routes\": [{\"origin\": \"Limeira\", \"destination\": \"Americana\", \"distance\": 0}]}")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
 		    .post("/maps")

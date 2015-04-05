@@ -7,7 +7,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.wallmart.domain.Map;
 
-public class MapRepository extends MongoBaseRepository<Map> {
+public class MapRepository extends MongoBaseRepository<String, Map> {
 
 	@Inject
 	private MongoDatabase db;

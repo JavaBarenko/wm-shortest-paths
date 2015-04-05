@@ -12,6 +12,21 @@ public class ShortestPath {
 
 	private float distance;
 
+	public ShortestPath(Map map, String origin, String destination) {
+
+		// TODO: implementar djkistra
+
+		float distance = 1;
+		String[] path = new String[] { "São Paulo", "Limeira", "Americana" };
+
+		this.mapName = map.getName();
+		this.origin = origin;
+		this.destination = destination;
+		this.path = path;
+		this.distance = distance;
+
+	}
+
 	public String getMapName() {
 
 		return mapName;

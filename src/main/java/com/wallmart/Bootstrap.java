@@ -10,14 +10,19 @@ import com.wallmart.resource.MapResource;
 
 public class Bootstrap {
 
+	// TODO: separate test and production db
+
 	private Injector injector;
 
 	public static void main(String[] args) {
 
-		Bootstrap bootstrap = new Bootstrap();
+		new Bootstrap().start();
+	}
 
-		bootstrap.configureGuice();
-		bootstrap.startHTTPServer();
+	public void start() {
+
+		configureGuice();
+		startHTTPServer();
 	}
 
 	private void configureGuice() {
@@ -36,7 +41,7 @@ public class Bootstrap {
 
 	}
 
-	public void startHTTPServer() {
+	private void startHTTPServer() {
 
 		injector.getInstance(MapResource.class);
 	}

@@ -34,6 +34,7 @@ public class Map {
 
 		if (StringUtils.isEmpty(name)) throw new IllegalArgumentException("Empty map name");
 		if (routes == null) throw new IllegalArgumentException("Empty routes");
+		if (routes.size() <= 0) throw new IllegalArgumentException("Empty routes");
 
 		routes.forEach(r -> r.validate());
 	}

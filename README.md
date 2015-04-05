@@ -5,12 +5,13 @@
 ## Technologies
 
 - Java 8 - lambda and collections new features
-- JUnit - Unit tests
 - Gson - Google Java library to manipulate JSON
+- Google Guice - lightweight dependency injection framework
 - Spark Java - lightweight web framework to expose REST APIs
 - MongoDB - Schemaless and document based database
+- Junit - Unit tests
+- Mockito - Mock tests
 - REST-Assured - DSL framework to REST APIs integration tests
- 
 
 ## Requirements
 

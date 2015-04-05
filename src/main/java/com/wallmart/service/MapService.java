@@ -1,31 +1,21 @@
 package com.wallmart.service;
 
-import org.bson.Document;
-
-import com.google.gson.Gson;
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.google.inject.Inject;
 import com.wallmart.domain.Map;
 import com.wallmart.domain.ShortestPath;
 import com.wallmart.domain.ShortestPathCost;
+import com.wallmart.persistence.MapRepository;
 
 public class MapService {
 
+	// TODO: map name = id
+
+	@Inject
+	private MapRepository repository;
+
 	public void save(Map map) {
 
-		// TODO: separar persistencia
-		// TODO: fazer teste unitario do service
-		// TODO: implementar djkistra
-
-		MongoClient client = new MongoClient();
-		MongoDatabase db = client.getDatabase("logistic");
-		MongoCollection<Document> collection = db.getCollection("map");
-
-		Document doc = Document.parse(new Gson().toJson(map));
-		collection.insertOne(doc);
-
-		client.close();
+		repository.save(map);
 	}
 
 	public ShortestPathCost calculateShortestPathCost(
@@ -49,6 +39,8 @@ public class MapService {
 	}
 
 	public ShortestPath calculateShortestPath(String mapName, String origin, String destination) {
+
+		// TODO: implementar djkistra
 
 		float distance = 1;
 		String[] path = new String[] { "São Paulo", "Limeira", "Americana" };

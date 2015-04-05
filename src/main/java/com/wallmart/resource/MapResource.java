@@ -7,6 +7,7 @@ import static spark.Spark.post;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
+import com.google.inject.Inject;
 import com.wallmart.domain.Map;
 import com.wallmart.domain.ShortestPathCost;
 import com.wallmart.service.MapService;
@@ -14,7 +15,8 @@ import com.wallmart.service.MapService;
 // TODO: doc API (swagger)?
 public class MapResource {
 
-	private MapService service = new MapService();
+	@Inject
+	private MapService service;
 
 	public MapResource() {
 

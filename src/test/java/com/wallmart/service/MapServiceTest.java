@@ -6,6 +6,7 @@ import com.wallmart.domain.Map;
 
 public class MapServiceTest {
 
+	// TODO: fazer teste unitario do service
 	@Test
 	public void testSaveMap() {
 

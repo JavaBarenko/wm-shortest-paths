@@ -18,6 +18,7 @@ public class MapResourceIntegrationTest {
 	@BeforeClass
 	public static void tearUp() {
 
+		// TODO: separate test and production db
 		new Bootstrap().start();
 
 		RestAssured.proxy("localhost", 4567);
@@ -262,11 +263,10 @@ public class MapResourceIntegrationTest {
 		    .statusCode(200)
 		    .body("autonomy", is(5f))
 		    .body("fuelPrice", is(3.8f))
-		    .body("cost", is(0.76f));
-		// .body("shortestPath.size()", equalTo(2));
-		// .body("path.size()", equalTo(2));
-		// .body("path.get(0)", equalTo("Rio de Janeiro"))
-		// .body("path.get(1)", equalTo("Belford Roxo"));
+		    .body("cost", is(0.76f))
+		    .body("shortestPath.path.size()", equalTo(2))
+		    .body("shortestPath.path.get(0)", equalTo("Rio de Janeiro"))
+		    .body("shortestPath.path.get(1)", equalTo("Belford Roxo"));
 
 	}
 
@@ -623,7 +623,4 @@ public class MapResourceIntegrationTest {
 		    .then()
 		    .statusCode(400);
 	}
-
-	// TODO: testes com shortest paths cost results
-
 }

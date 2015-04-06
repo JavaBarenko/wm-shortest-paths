@@ -1,6 +1,6 @@
 package com.wallmart.domain;
 
-import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -8,7 +8,7 @@ public class Map {
 
 	private String name;
 
-	private List<Route> routes;
+	private Set<Route> routes;
 
 	public String getName() {
 
@@ -20,12 +20,12 @@ public class Map {
 		this.name = name;
 	}
 
-	public List<Route> getRoutes() {
+	public Set<Route> getRoutes() {
 
 		return routes;
 	}
 
-	public void setRoutes(List<Route> routes) {
+	public void setRoutes(Set<Route> routes) {
 
 		this.routes = routes;
 	}

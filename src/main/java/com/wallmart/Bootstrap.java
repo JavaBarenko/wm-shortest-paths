@@ -10,8 +10,6 @@ import com.wallmart.resource.MapResource;
 
 public class Bootstrap {
 
-	// TODO: separate test and production db
-
 	private Injector injector;
 
 	public static void main(String[] args) {

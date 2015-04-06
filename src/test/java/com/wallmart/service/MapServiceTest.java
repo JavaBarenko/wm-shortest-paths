@@ -7,8 +7,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 import org.junit.Before;
@@ -49,7 +49,7 @@ public class MapServiceTest {
 		ROUTE_LIMEIRA_AMERICANA.setDistance(30f);
 
 		MAP_SP.setName("SP");
-		MAP_SP.setRoutes(Arrays.asList(ROUTE_SAOPAULO_LIMEIRA, ROUTE_LIMEIRA_AMERICANA));
+		MAP_SP.setRoutes(new HashSet<Route>(Arrays.asList(ROUTE_SAOPAULO_LIMEIRA, ROUTE_LIMEIRA_AMERICANA)));
 	}
 
 	/*
@@ -95,7 +95,7 @@ public class MapServiceTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testSaveMapWithEmptyRoutes() {
 
-		MAP_SP.setRoutes(new ArrayList<Route>());
+		MAP_SP.setRoutes(new HashSet<Route>());
 		service.save(MAP_SP);
 
 		verify(repositoryMock, times(0)).save("SP", MAP_SP);

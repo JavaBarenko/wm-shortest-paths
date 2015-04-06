@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ public class Dijkstra {
 
 	}
 
-	public static Dijkstra initialize(List<Route> routes) {
+	public static Dijkstra initialize(Set<Route> routes) {
 
 		Dijkstra dijkstra = new Dijkstra();
 
@@ -62,6 +61,8 @@ public class Dijkstra {
 
 			unburned.remove(city);
 
+			if (city.equals(destination)) continue;
+
 			Set<Route> unburnedNeighbors = getUnburnedNeighbors(city);
 
 			unburnedNeighbors.forEach(n -> {
@@ -75,8 +76,8 @@ public class Dijkstra {
 				}
 			});
 
-			System.out.println(predecessorOf);
-			System.out.println(distanceFromOrigin);
+			// System.out.println(predecessorOf);
+			// System.out.println(distanceFromOrigin);
 
 		}
 

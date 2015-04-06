@@ -14,8 +14,6 @@ import com.mongodb.client.model.UpdateOptions;
 
 public abstract class MongoBaseRepository<K, T> extends BaseRepository<K, T> {
 
-	// TODO: teste unitario
-
 	public abstract MongoCollection<Document> getMongoCollection();
 
 	public T save(K id, T obj) {

@@ -8,7 +8,7 @@ import com.wallmart.persistence.MapRepository;
 
 public class MapService {
 
-	private MapRepository repository = null;
+	private MapRepository repository;
 
 	@Inject
 	public void setRepository(MapRepository repository) {

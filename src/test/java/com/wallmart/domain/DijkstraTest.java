@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Before;
@@ -25,14 +25,35 @@ public class DijkstraTest {
 
 	private final Route ROUTE_PIRACICABA_SAOPAULO = new Route();
 
-	private final List<Route> ROUTES_SAOPAULO_LIMEIRA_AMERICANA = Arrays
-	    .asList(ROUTE_SAOPAULO_LIMEIRA, ROUTE_LIMEIRA_AMERICANA);
+	private final Route ROUTE_AMERICANA_SUMARE = new Route();
 
-	private final List<Route> ROUTES_SAOPAULO_LIMEIRA_AMERICANA_WITH_CYCLE = Arrays
-	    .asList(ROUTE_SAOPAULO_LIMEIRA, ROUTE_LIMEIRA_PIRACICABA, ROUTE_PIRACICABA_SAOPAULO, ROUTE_LIMEIRA_AMERICANA, ROUTE_SAOPAULO_CAMPINAS, ROUTE_CAMPINAS_AMERICANA);
+	private final Set<Route> ROUTES_SAOPAULO_LIMEIRA_AMERICANA = new HashSet<Route>(
+	    Arrays.asList(ROUTE_SAOPAULO_LIMEIRA, ROUTE_LIMEIRA_AMERICANA));
 
-	private final List<Route> ROUTES_SAOPAULO_LIMEIRA_AMERICANA_SAOPAULO_CAMPINAS_CAMPINAS_AMERICANA = Arrays
-	    .asList(ROUTE_SAOPAULO_LIMEIRA, ROUTE_LIMEIRA_AMERICANA, ROUTE_SAOPAULO_CAMPINAS, ROUTE_CAMPINAS_AMERICANA);
+	private final Set<Route> ROUTES_SAOPAULO_LIMEIRA_AMERICANA_WITH_CYCLE = new HashSet<Route>(
+	    Arrays
+	        .asList(ROUTE_SAOPAULO_LIMEIRA, ROUTE_LIMEIRA_PIRACICABA, ROUTE_PIRACICABA_SAOPAULO, ROUTE_LIMEIRA_AMERICANA, ROUTE_SAOPAULO_CAMPINAS, ROUTE_CAMPINAS_AMERICANA));
+
+	private final Set<Route> ROUTES_SAOPAULO_LIMEIRA_AMERICANA_SAOPAULO_CAMPINAS_CAMPINAS_AMERICANA = new HashSet<Route>(
+	    Arrays
+	        .asList(ROUTE_SAOPAULO_LIMEIRA, ROUTE_LIMEIRA_AMERICANA, ROUTE_SAOPAULO_CAMPINAS, ROUTE_CAMPINAS_AMERICANA));
+
+	private final Set<Route> ROUTES_SAOPAULO_LIMEIRA_AMERICANA_SAOPAULO_CAMPINAS_CAMPINAS_AMERICANA_AMERICANA_SUMARE = new HashSet<Route>(
+	    Arrays
+	        .asList(ROUTE_SAOPAULO_LIMEIRA, ROUTE_LIMEIRA_AMERICANA, ROUTE_SAOPAULO_CAMPINAS, ROUTE_CAMPINAS_AMERICANA, ROUTE_AMERICANA_SUMARE));
+
+	private final Route ROUTE_A_B = new Route();
+	private final Route ROUTE_B_D = new Route();
+	private final Route ROUTE_A_C = new Route();
+	private final Route ROUTE_C_D = new Route();
+	private final Route ROUTE_B_E = new Route();
+	private final Route ROUTE_D_E = new Route();
+
+	private final Set<Route> ROUTES_EXAMPLE = new HashSet<Route>(Arrays
+	    .asList(ROUTE_A_B, ROUTE_B_D, ROUTE_A_C, ROUTE_C_D, ROUTE_B_E, ROUTE_D_E));
+
+	private final Set<Route> ROUTES_WITH_DUPLICATES = new HashSet<Route>(Arrays
+	    .asList(ROUTE_A_B, ROUTE_B_E, ROUTE_B_D, ROUTE_B_D, ROUTE_A_C, ROUTE_B_E, ROUTE_C_D, ROUTE_B_E, ROUTE_D_E));
 
 	@Before
 	public void tearUp() {
@@ -60,6 +81,34 @@ public class DijkstraTest {
 		ROUTE_PIRACICABA_SAOPAULO.setOrigin("Piracicaba");
 		ROUTE_PIRACICABA_SAOPAULO.setDestination("São Paulo");
 		ROUTE_PIRACICABA_SAOPAULO.setDistance(120f);
+
+		ROUTE_AMERICANA_SUMARE.setOrigin("Americana");
+		ROUTE_AMERICANA_SUMARE.setDestination("Sumaré");
+		ROUTE_AMERICANA_SUMARE.setDistance(10f);
+
+		ROUTE_A_B.setOrigin("A");
+		ROUTE_A_B.setDestination("B");
+		ROUTE_A_B.setDistance(10f);
+
+		ROUTE_B_D.setOrigin("B");
+		ROUTE_B_D.setDestination("D");
+		ROUTE_B_D.setDistance(15f);
+
+		ROUTE_A_C.setOrigin("A");
+		ROUTE_A_C.setDestination("C");
+		ROUTE_A_C.setDistance(20f);
+
+		ROUTE_C_D.setOrigin("C");
+		ROUTE_C_D.setDestination("D");
+		ROUTE_C_D.setDistance(30f);
+
+		ROUTE_B_E.setOrigin("B");
+		ROUTE_B_E.setDestination("E");
+		ROUTE_B_E.setDistance(50f);
+
+		ROUTE_D_E.setOrigin("D");
+		ROUTE_D_E.setDestination("E");
+		ROUTE_D_E.setDistance(30f);
 	}
 
 	@Test
@@ -155,7 +204,10 @@ public class DijkstraTest {
 	@Test
 	public void testCalculateShortestPathWithOneRouteMap() {
 
-		Dijkstra calculator = Dijkstra.initialize(Arrays.asList(ROUTE_LIMEIRA_AMERICANA));
+		HashSet<Route> route = new HashSet<Route>();
+		route.add(ROUTE_LIMEIRA_AMERICANA);
+
+		Dijkstra calculator = Dijkstra.initialize(route);
 
 		DijkstraResult result = calculator.calculateShortestPath("Limeira", "Americana");
 
@@ -199,6 +251,44 @@ public class DijkstraTest {
 
 		assertEquals(result.getDistance(), 110.5f, 0.0001);
 		assertArrayEquals(result.getPath(), new String[] { "São Paulo", "Campinas", "Americana" });
+
+	}
+
+	@Test
+	public void testCalculateShortestPathWithTwoPossibleRoutesAndRoutesAfterDestination() {
+
+		Dijkstra calculator = Dijkstra
+		    .initialize(new HashSet<Route>(
+		        ROUTES_SAOPAULO_LIMEIRA_AMERICANA_SAOPAULO_CAMPINAS_CAMPINAS_AMERICANA_AMERICANA_SUMARE));
+
+		DijkstraResult result = calculator.calculateShortestPath("São Paulo", "Americana");
+
+		assertEquals(result.getDistance(), 110.5f, 0.0001);
+		assertArrayEquals(result.getPath(), new String[] { "São Paulo", "Campinas", "Americana" });
+
+	}
+
+	@Test
+	public void testCalculateShortestPathExample() {
+
+		Dijkstra calculator = Dijkstra.initialize(ROUTES_EXAMPLE);
+
+		DijkstraResult result = calculator.calculateShortestPath("A", "D");
+
+		assertEquals(result.getDistance(), 25f, 0.0001);
+		assertArrayEquals(result.getPath(), new String[] { "A", "B", "D" });
+
+	}
+
+	@Test
+	public void testCalculateShortestPathOfRoutesWithDuplicates() {
+
+		Dijkstra calculator = Dijkstra.initialize(ROUTES_WITH_DUPLICATES);
+
+		DijkstraResult result = calculator.calculateShortestPath("A", "D");
+
+		assertEquals(result.getDistance(), 25f, 0.0001);
+		assertArrayEquals(result.getPath(), new String[] { "A", "B", "D" });
 
 	}
 }

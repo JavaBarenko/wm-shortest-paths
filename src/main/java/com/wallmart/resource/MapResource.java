@@ -10,7 +10,6 @@ import com.wallmart.domain.Map;
 import com.wallmart.domain.ShortestPathCost;
 import com.wallmart.service.MapService;
 
-// TODO: doc API (swagger)?
 public class MapResource {
 
 	@Inject

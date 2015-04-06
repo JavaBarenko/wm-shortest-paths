@@ -23,6 +23,10 @@ public class MapResourceIntegrationTest {
 		RestAssured.proxy("localhost", 4567);
 	}
 
+	/*
+	 * POST /maps
+	 */
+
 	@Test
 	public void testPostWithOneRoute() {
 
@@ -231,6 +235,10 @@ public class MapResourceIntegrationTest {
 
 	}
 
+	/*
+	 * GET /maps/:name/shortest-path-costs
+	 */
+
 	@Test
 	public void testGetShortestPathWithOneEdge() {
 
@@ -249,7 +257,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "3.8")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/RJ/shortestPathCosts")
+		    .get("/maps/RJ/shortest-path-costs")
 		    .then()
 		    .statusCode(200)
 		    .body("autonomy", is(5f))
@@ -280,7 +288,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "4")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(200)
 		    .body("autonomy", is(10f))
@@ -315,7 +323,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "4")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}
@@ -338,7 +346,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "4")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}
@@ -360,7 +368,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "4")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}
@@ -383,7 +391,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "4")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}
@@ -405,7 +413,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "4")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}
@@ -428,7 +436,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "4")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}
@@ -451,7 +459,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "4")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}
@@ -474,7 +482,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "4")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}
@@ -497,7 +505,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "4")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}
@@ -519,7 +527,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("autonomy", "10")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}
@@ -542,7 +550,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}
@@ -565,7 +573,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "one")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}
@@ -588,7 +596,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "-1")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}
@@ -611,7 +619,7 @@ public class MapResourceIntegrationTest {
 		    .queryParam("fuelPrice", "0")
 		    .contentType("application/json; charset=UTF-8")
 		    .when()
-		    .get("/maps/SP/shortestPathCosts")
+		    .get("/maps/SP/shortest-path-costs")
 		    .then()
 		    .statusCode(400);
 	}

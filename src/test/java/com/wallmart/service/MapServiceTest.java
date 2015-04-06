@@ -17,6 +17,7 @@ import org.junit.Test;
 import com.wallmart.domain.Map;
 import com.wallmart.domain.Route;
 import com.wallmart.domain.ShortestPath;
+import com.wallmart.domain.ShortestPathCost;
 import com.wallmart.persistence.MapRepository;
 
 public class MapServiceTest {
@@ -193,11 +194,25 @@ public class MapServiceTest {
 		assertEquals(shortestPath.getDistance(), 180f, 0.001f);
 	}
 
-	// TODO: validate invalid maps calculation???
-
 	/*
 	 * calculateShortestPathCost()
 	 */
 
-	// TODO: implement calculateShortestPathCost
+	@Test
+	public void testCalculateShortestCostPathWithOneEdge() {
+
+		when(repositoryMock.findById("SP")).thenReturn(MAP_SP);
+
+		ShortestPathCost cost = service.calculateShortestPathCost("SP", "São Paulo", "Americana", 11f, 3.5f);
+
+		verify(repositoryMock, times(1)).findById("SP");
+		assertEquals(cost.getShortestPath().getMapName(), "SP");
+		assertEquals(cost.getShortestPath().getOrigin(), "São Paulo");
+		assertEquals(cost.getShortestPath().getDestination(), "Americana");
+		assertArrayEquals(cost.getShortestPath().getPath(), new String[] { "São Paulo", "Limeira", "Americana" });
+		assertEquals(cost.getShortestPath().getDistance(), 180f, 0.0001f);
+		assertEquals(cost.getAutonomy(), 11f, 0.0001);
+		assertEquals(cost.getFuelPrice(), 3.5f, 0.0001);
+		assertEquals(cost.getCost(), 57.27272f, 0.0001);
+	}
 }

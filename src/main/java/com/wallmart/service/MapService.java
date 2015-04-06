@@ -26,8 +26,6 @@ public class MapService {
 
 		Map map = repository.findById(mapName);
 
-		map.validate();
-
 		return new ShortestPath(map, origin, destination);
 	}
 
@@ -40,14 +38,6 @@ public class MapService {
 
 		ShortestPath shortestPath = calculateShortestPath(mapName, origin, destination);
 
-		float cost = (shortestPath.getDistance() / autonomy) * fuelPrice;
-
-		ShortestPathCost shortestPathCost = new ShortestPathCost();
-		shortestPathCost.setShortestPath(shortestPath);
-		shortestPathCost.setAutonomy(autonomy);
-		shortestPathCost.setFuelPrice(fuelPrice);
-		shortestPathCost.setCost(cost);
-
-		return shortestPathCost;
+		return new ShortestPathCost(shortestPath, autonomy, fuelPrice);
 	}
 }

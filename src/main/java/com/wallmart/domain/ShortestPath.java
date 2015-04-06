@@ -1,5 +1,7 @@
 package com.wallmart.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class ShortestPath {
 
 	private String mapName;
@@ -14,17 +16,17 @@ public class ShortestPath {
 
 	public ShortestPath(Map map, String origin, String destination) {
 
-		// TODO: implementar djkistra
+		map.validate();
+		if (StringUtils.isEmpty(origin)) throw new IllegalArgumentException("Empty origin");
+		if (StringUtils.isEmpty(destination)) throw new IllegalArgumentException("Empty destination");
 
-		float distance = 1;
-		String[] path = new String[] { "São Paulo", "Limeira", "Americana" };
+		DijkstraResult calc = Dijkstra.initialize(map.getRoutes()).calculateShortestPath(origin, destination);
 
 		this.mapName = map.getName();
 		this.origin = origin;
 		this.destination = destination;
-		this.path = path;
-		this.distance = distance;
-
+		this.path = calc.getPath();
+		this.distance = calc.getDistance();
 	}
 
 	public String getMapName() {

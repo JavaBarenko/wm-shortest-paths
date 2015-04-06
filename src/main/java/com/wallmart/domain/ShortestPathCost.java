@@ -10,6 +10,21 @@ public class ShortestPathCost {
 
 	private Float cost;
 
+	public ShortestPathCost(ShortestPath shortestPath, Float autonomy, Float fuelPrice) {
+
+		if (autonomy == null) throw new IllegalArgumentException("Empty autonomy");
+		if (fuelPrice == null) throw new IllegalArgumentException("Empty fuel price");
+		if (autonomy <= 0) throw new IllegalArgumentException("Autonomy should be greater or equal than 0");
+		if (fuelPrice <= 0) throw new IllegalArgumentException("Fuel price should be greater or equal than 0");
+
+		Float cost = (shortestPath.getDistance() / autonomy) * fuelPrice;
+
+		this.shortestPath = shortestPath;
+		this.autonomy = autonomy;
+		this.fuelPrice = fuelPrice;
+		this.cost = cost;
+	}
+
 	public ShortestPath getShortestPath() {
 
 		return shortestPath;

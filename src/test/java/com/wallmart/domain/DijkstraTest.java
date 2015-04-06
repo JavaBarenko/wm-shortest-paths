@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.junit.Before;
@@ -175,7 +176,7 @@ public class DijkstraTest {
 		assertEquals(city, "Limeira");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NoSuchElementException.class)
 	public void testCalculateShortestPathWithOriginNotExistent() {
 
 		Dijkstra calculator = Dijkstra.initialize(ROUTES_SAOPAULO_LIMEIRA_AMERICANA);
@@ -184,7 +185,7 @@ public class DijkstraTest {
 
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NoSuchElementException.class)
 	public void testCalculateShortestPathWithDestinationNotExistent() {
 
 		Dijkstra calculator = Dijkstra.initialize(ROUTES_SAOPAULO_LIMEIRA_AMERICANA);

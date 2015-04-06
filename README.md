@@ -49,6 +49,10 @@ mvn clean test
 mvn clean verify -P integration-test
 ```
 
+### Config
+
+Alter the MongoDB configuration in /src/main/resources/config.properties, setting the correct host and port (default: localhost:27017)
+
 ### Start server
 
 ```bash

@@ -37,12 +37,6 @@ mvn -version
 git clone https://github.com/nessauepa/wm-shortest-paths.git
 ```
 
-### Start server
-
-```bash
-mvn clean install exec:java -Dexec.mainClass="com.wallmart.Bootstrap"
-```
-
 ### Unit tests
 
 ```bash
@@ -55,6 +49,70 @@ mvn clean test
 mvn clean verify -P integration-test
 ```
 
+### Start server
+
+```bash
+mvn clean install exec:java -Dexec.mainClass="com.wallmart.Bootstrap"
+```
+
+### Test
+
+http://localhost:4567
+
+
 ## API DOC
 
-// TODO
+### POST /maps
+Insert or update a map
+
+#### Request payload
+```json
+{
+        "name": "SP",
+        "routes": [
+            {
+                "origin": "Indaiatuba",
+                "destination": "Limeira",
+              "distance": 100
+            },
+            {
+                "origin": "Limeira",
+                "destination": "Americana",
+                 "distance": 30
+            }
+        ]
+}
+```
+name - map name [required]
+routes - a list of route objects [required at least one]
+route.origin - origin of this route (string) [required]
+route.destination - destination of this route (string) [required]
+route.distance - distance from origin to destination (float) [required]
+
+#### Return payload (same object from request)
+```json
+{
+        "name": "SP",
+        "routes": [
+            {
+                "origin": "Indaiatuba",
+                "destination": "Limeira",
+              "distance": 100
+            },
+            {
+                "origin": "Limeira",
+                "destination": "Americana",
+                 "distance": 30
+            }
+        ]
+}
+```
+
+
+#### Return HTTP Codes
+
+HTTP  Code | Description
+------------- | -------------
+202 - Accepted  | Map was saved or updated
+400 - Bad Request  | Illegal request, missing or invalid field
+

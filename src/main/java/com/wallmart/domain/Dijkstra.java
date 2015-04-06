@@ -8,6 +8,9 @@ import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/*
+ * Reference: http://www.math.cornell.edu/~mec/Winter2009/Thompson/search.html
+ */
 public class Dijkstra {
 
 	HashMap<String, Float> distanceFromOrigin = new HashMap<String, Float>();

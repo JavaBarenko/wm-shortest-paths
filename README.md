@@ -94,7 +94,7 @@ route.distance | distance from origin to destination (float) [required]
 
 #### Example
 ```bash
-curl -X POST http://localhost:4567/maps -d '{"name": "SP","routes": [{"origin": "Indaiatuba","destination": "Limeira","distance": 100}]}```
+curl -X POST 'http://localhost:4567/maps' -d '{"name": "SP","routes": [{"origin": "Indaiatuba","destination": "Limeira","distance": 100}]}'```
 
 #### Return payload (same object from request)
 
@@ -123,7 +123,7 @@ fuelPrice | price of fuel in km/l (float). Should be greather than 0. [required]
 
 #### Example
 ```bash
-curl -X GET http://localhost:4567/maps/SP/shortest-path-costs?origin=São+Paulo&destination=Americana&autonomy=11&fuelPrice=3.20
+curl -X GET 'http://localhost:4567/maps/SP/shortest-path-costs?origin=São+Paulo&destination=Americana&autonomy=11&fuelPrice=3.20'
 ```
 
 #### Return payload (same object from request)

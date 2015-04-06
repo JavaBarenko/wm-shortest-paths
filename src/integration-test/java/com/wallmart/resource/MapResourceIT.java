@@ -6,14 +6,11 @@ import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import com.jayway.restassured.RestAssured;
 import com.wallmart.Bootstrap;
-import com.wallmart.IntegrationTest;
 
-@Category(IntegrationTest.class)
-public class MapResourceIntegrationTest {
+public class MapResourceIT {
 
 	@BeforeClass
 	public static void tearUp() {

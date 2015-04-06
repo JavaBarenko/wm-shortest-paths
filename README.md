@@ -94,7 +94,8 @@ route.distance | distance from origin to destination (float) [required]
 
 #### Example
 ```bash
-curl -X POST 'http://localhost:4567/maps' -d '{"name": "SP","routes": [{"origin": "Indaiatuba","destination": "Limeira","distance": 100}]}'```
+curl -X POST 'http://localhost:4567/maps' -d '{"name": "SP","routes": [{"origin": "Indaiatuba","destination": "Limeira","distance": 100}]}'
+```
 
 #### Return payload (same object from request)
 

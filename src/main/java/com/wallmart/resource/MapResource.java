@@ -4,6 +4,8 @@ import static spark.Spark.get;
 import static spark.Spark.halt;
 import static spark.Spark.post;
 
+import java.util.NoSuchElementException;
+
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.wallmart.domain.Map;
@@ -78,6 +80,10 @@ public class MapResource {
 			} catch (IllegalArgumentException e) {
 
 				halt(400, e.getMessage());
+
+			} catch (NoSuchElementException e2) {
+
+				halt(404, e2.getMessage());
 			}
 
 			resp.status(200);

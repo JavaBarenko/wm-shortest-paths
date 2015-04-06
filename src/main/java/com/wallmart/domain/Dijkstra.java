@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -53,8 +54,8 @@ public class Dijkstra {
 
 	public DijkstraResult calculateShortestPath(String origin, String destination) {
 
-		if (!unburned.contains(origin)) throw new IllegalArgumentException("Origin not found");
-		if (!unburned.contains(destination)) throw new IllegalArgumentException("Destination not found");
+		if (!unburned.contains(origin)) throw new NoSuchElementException("Origin not found");
+		if (!unburned.contains(destination)) throw new NoSuchElementException("Destination not found");
 
 		distanceFromOrigin.put(origin, 0f);
 
